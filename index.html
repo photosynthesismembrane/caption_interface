@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captions</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #controls {
+            margin-bottom: 20px;
+            display: flex;
+            /* flex-direction: column; Changed to column to accommodate the new toggle checkbox */
+        }
+        #questions-container {
+            width: 40vw;
+            max-height: 300px;
+            background-color: #f7f7f7; /* Slightly greyish background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Add vertical space */
+        }
+        .question-item {
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .question-item.selected {
+            background-color: #d4edda; /* Light green background for selected questions */
+        }
+        .question-item:hover {
+            background-color: #e0e0e0;
+        }
+        #checkboxes {
+            display: flex;
+            width: 40vw;
+            justify-content: center;
+            gap: 20px; /* Add space between checkboxes */
+            margin-bottom: 20px; /* Add vertical space */
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input[type="checkbox"] {
+            width: 30px;
+            height: 30px;
+            appearance: none;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #d4edda; /* Light green background for checked checkboxes */
+            border-color: #4caf50;
+        }
+        #image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .image-wrapper {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 25vw;
+        }
+        .answers {
+            display: flex;
+            margin-left: 20px;
+        }
+        .answer-box {
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 20vw;
+            background-color: #f9f9f9;
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            width: 100px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d4edda;
+        }
+        /* Dropdown styling */
+        .dropdown-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 20vw;
+        }
+        select {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none; /* Remove default arrow */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\'%3e%3cpath fill=\'%23666\' d=\'M7 10l5-5H2z\'/%3e%3c/svg%3e');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 10px;
+        }
+        select:hover {
+            border-color: #4caf50;
+        }
+        .hightlight {
+            background-color: #ffb7b7;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <div class="dropdown-container">
+            <select id="data-source" onchange="changeDataSource()">
+                <option value="pinterest">Pinterest</option>
+                <option value="renaissance">Renaissance</option>
+                <option value="band_poster">Band Poster</option>
+                <option value="landscape">Landscape</option>
+                <option value="wikiart_selection">WikiArt</option>
+                <option value="graffiti">Graffiti</option>
+            </select>
+        </div>
+        <div id="checkboxes">
+            <div class="checkbox-container">
+                <input type="checkbox" id="llava" checked>
+                <label for="llava">llava</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="cogvlm" checked>
+                <label for="cogvlm">cogvlm</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="deepseek" checked>
+                <label for="deepseek">deepseek</label>
+            </div>
+        </div>
+        <div id="questions-container">
+            <div class="checkbox-container">
+                <input type="checkbox" id="multiple-questions">
+                <label for="multiple-questions">Concatenate multiple questions</label>
+            </div>
+            <!-- Questions will be populated here -->
+        </div>
+    </div>
+    <div id="image-container"></div>
+    <div id="navigation-buttons" class="navigation">
+        <button onclick="loadPrevious()">Previous</button>
+        <button onclick="loadNext()">Next</button>
+    </div>
+    <script src="pinterest_data.js"></script>
+    <script src="renaissance_data.js"></script>
+    <script src="band_poster_data.js"></script>
+    <script src="landscape_data.js"></script>
+    <script src="wikiart_selection_data.js"></script>
+    <script src="graffiti_data.js"></script>
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
